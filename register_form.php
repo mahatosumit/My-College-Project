@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <form method="post" action="validate_email.php">
+  <form method="post" action="valid_form.php">
   <div class="container">
     <h2>Registration Form </h2>
     <div class="form-container">
