@@ -1,20 +1,43 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre Registration/Scholarship Form (Grade XI)</title>
-    <link rel="stylesheet" href="student_form.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit Your Detail</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
+    
+</head>
 <body>
-    <div class="container">
-        <h2>Student's Registration Form</h2>
-        <div class="form-container">
-            <form>
+
+
+<div class="">
+
+    <div class="form-title">
+    <h2>Create Form</h2>
+    
+    
+    </div>
+ 
+    <p style="color:black">
+     <?php
+  $con = mysqli_connect("localhost", "root", "", "collage");
+
+  if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+
+  if (isset($_GET['id']) or isset($_GET['username'])) {
+    $id = $_GET['id'];
+ 
+    $sql = "SELECT * FROM userdetails WHERE id=$id";
+    $result = mysqli_query($con, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+    }
+  }
+  ?>
+   <form>
                 <div class="input-name">
                     <i class="fa fa-user"></i>
                     <input type="text" placeholder="Your Name" class="name">
@@ -50,8 +73,9 @@
                     <i class="fa fa-file-image-o" aria-hidden="true"></i>
 
                     <input name="file1" type="file" accept="application/pdf">
+                    
                     <!--our custom file upload button-->
-                    <label for="Photo ">Upload Your photo pdf</label>
+                    <label for="Photo ">Upload Your CV pdf </label>
                 </div>
 
                
@@ -89,8 +113,10 @@
 
                 </div>
             </form>
-        </div>
-    </div>
-</body>
+            <?php if(!empty($msg)){echo $msg; }?> 
+  <input type="submit" class="btn btn-primary" value="Update">
+      </form>
 
+
+</body>
 </html>

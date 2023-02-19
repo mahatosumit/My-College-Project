@@ -12,7 +12,7 @@
 
 <body>
   <div class="container">
-    <h2>Registration Form </h2>
+    <h2>Signin Form </h2>
     <div class="form-container">
       <form method="post" action="connect.php">
         <div class="input-name">
@@ -37,19 +37,37 @@
 
           <input type="text" placeholder="Conform Password" class="name"  name="conformPass">
         </div>
+
       
         <div class="input-name">
           <input type="Checkbox" class="check-button" name="check">
           <label>I accept all terms and conditions</label>
         </div>
+        
 
         <div class="Signin">
-          <button type="submit" class="Register" name="register">Signin</button>
+          <button type="submit" class="Register" name="register" onclick="window.location.href='who.htm';">Signin</button>
         </div>
 
       </form>
     </div>
   </div>
+    <?php
+$con=mysqli_connect('localhost','root','','collage');
+if(isset($_POST['sb']) )
+{
+    $name=$_POST['name'];
+    $email=$_POST['Email'];
+    $password=$_POST['password'];
+    $conform_password=$_POST['conformpass'];
+    $query="INSERT INTO `register` (`SN`, `name`, `email`, `password`, `conformpass`) 
+    VALUES ('', '$name', '$email', '$password', '$conform_password')";
+    $run=mysqli_query($con,$query);
+
+}
+
+
+?>
 </body>
 
 </html>

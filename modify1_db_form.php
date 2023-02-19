@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pre Registration/Scholarship Form (Grade XI)</title>
-  <link rel="stylesheet" href="register_form.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edit Your Detail</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
+    
+</head>
 <body>
-  <form method="post" action="validate_email.php">
-  <div class="container">
-    <h2>Registration Form </h2>
-    <div class="form-container">
-      <form method="post">
+
+
+<div class="">
+
+    <div class="form-title">
+    <h2>Create Form</h2>
+    
+    
+    </div>
+ 
+    <p style="color:black">
+     <?php
+  $con = mysqli_connect("localhost", "root", "", "collage");
+
+  if (!$con) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+
+  if (isset($_GET['id']) or isset($_GET['username'])) {
+    $id = $_GET['id'];
+ 
+    $sql = "SELECT * FROM userdetails WHERE id=$id";
+    $result = mysqli_query($con, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+    }
+  }
+  ?>
+<form method="post">
         <div class="input-name">
           <i class="fa fa-user"></i>
           <input type="text" placeholder="Your Name" class="name" name="name">
@@ -74,28 +96,10 @@
           
           <button type="submit" class="Register"  name="sb" onclick="window.location.href='signin_form.php';">Login</button>
         </div>
-
+        <?php if(!empty($msg)){echo $msg; }?> 
+  <input type="submit" class="btn btn-primary" value="Update">
       </form>
-    </div>
-  </div>
-  <?php
-$con =mysqli_connect('localhost','root','','collage');
-if(isset($_POST['sb']) )
-{
-    $name=$_POST['name'];
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    $conform_password=$_POST['conformpass'];
-    $gender=$_POST['gender'];
-    $province=$_POST['province'];
-    $query="INSERT INTO `register` (`SN`, `name`, `email`, `password`, `conformpass`, `gender`, `province`) 
-    VALUES ('', '$name', '$email', '$password', '$conform_password', 'gender', 'province')";
-    $run=mysqli_query($con,$query);
-
-}
 
 
-?>
 </body>
-
 </html>
