@@ -5,97 +5,101 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pre Registration/Scholarship Form (Grade XI)</title>
+  <title>Register</title>
   <link rel="stylesheet" href="register_form.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="vaild.js"></script>
 </head>
 
 <body>
-  <form method="post" action="valid_form.php">
   <div class="container">
     <h2>Registration Form </h2>
     <div class="form-container">
-      <form method="post">
+      <form method="post" action="">
         <div class="input-name">
           <i class="fa fa-user"></i>
-          <input type="text" placeholder="Your Name" class="name" name="name">
+          <input type="text" placeholder="Your Name" id="name" class="name" name="name" required>
 
         </div>
         <div class="input-name">
           <i class="fa fa-envelope email"></i>
-          <input type="text" placeholder="Email" class="name"  name="Email">
+          <input type="text" placeholder="Email" id="email" class="name"  name="email" required >
         </div>
 
         <div class="input-name">
           <i class="fa fa-lock" aria-hidden="true"></i>
 
 
-          <input type="text" placeholder="Password" class="name"  name="Password">
+          <input type="text" placeholder="Password" id="password" class="name"  name="password" required >
         </div>
 
         <div class="input-name">
           <i class="fa fa-lock" aria-hidden="true"></i>
 
-          <input type="text" placeholder="Conform Password" class="name"  name="conformPass">
+          <input type="text" placeholder="Conform Password" id="conformPass" class="name"  name="conformPass" required >
         </div>
-        <div class="gender">
+        <div class="gender" id="gender" required>
         <i class="fa fa-venus-mars" aria-hidden="true"></i>
 
-        <label for="male" class="radio-line"><input type="radio" name="gender" > Male </label>
-        <label for="male" class="radio-line"><input type="radio" name="gender" > Female </label>
-        <label for="male" class="radio-line"><input type="radio" name="gender" > Others </label>
+        <label for="male" class="radio-line"><input type="radio" name="gender" value="male" required> Male </label>
+        <label for="male" class="radio-line"><input type="radio" name="gender" value="female" required> Female </label>
+        <label for="male" class="radio-line"><input type="radio" name="gender" value="other" required> Prefer not to say </label>
       </div>
        
         </div>
-        <div class="input-Province">
-          <select class="Province">
-            <option name="Province">Select a Province</option>
-            <option value="1" name=" Province">Province 1</option>
-            <option value="2" name=" Province">Madhesh</option>
-            <option value="3" name=" Province">Bagmati</option>
-            <option value="4" name=" Province">Gandaki</option>
-            <option value="5" name=" Province">Lumbini</option>
-            <option value="6" name=" Province">Karnali</option>
-            <option value="7" name=" Province">Sudurpashchim</option>
+        <div class="input-province" required>
+          <select class="Province" id="province" name="province"  required>
+            <option name="province">Select a province</option>
+            <option value="1">province 1</option>
+            <option value="2">Madhesh</option>
+            <option value="3">Bagmati</option>
+            <option value="4">Gandaki</option>
+            <option value="5">Lumbini</option>
+            <option value="6">Karnali</option>
+            <option value="7">Sudurpashchim</option>
           </select>
           <div class="arrow"></div>
         </div>
 
-        <div class="input-name">
+        <div class="input-name" required>
           <input type="Checkbox" class="check-button" name="check">
           <label>I accept all terms and conditions</label>
         </div>
 
         <div class="Register">
-          <button type="submit" class="Register" name="sb">Register</button>
+          <button type="submit" class="Register" name="submit" onclick="window.location.href='signin_form.php';">Register</button>
         </div>
         <h5>If you have registed then Login</h5>
         <div class="Register">
           
-          <button type="submit" class="Register"  name="sb" onclick="window.location.href='signin_form.php';">Login</button>
+          <button type="submit" id="register"class="Register"  name="submit" onclick="window.location.href='signin_form.php';" value="login">Login</button>
         </div>
 
       </form>
     </div>
   </div>
-  <?php
-$con =mysqli_connect('localhost','root','','collage');
-if(isset($_POST['sb']) )
-{
-    $name=$_POST['name'];
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    $conform_password=$_POST['conformpass'];
-    $gender=$_POST['gender'];
-    $province=$_POST['province'];
-    $query="INSERT INTO `register` (`SN`, `name`, `email`, `password`, `conformpass`, `gender`, `province`) 
-    VALUES ('', '$name', '$email', '$password', '$conform_password', 'gender', 'province')";
-    $run=mysqli_query($con,$query);
-
-}
-
-
-?>
+   <?PHP
+          include 'connection_db.php'; 
+          $con =mysqli_connect('localhost','root','','collage');
+       if(isset($_POST['submit']) );
+       {
+       
+           $name=$_POST['name'];
+           $email=$_POST['email'];
+           $password=$_POST['password'];
+           $conformpass=$_POST['conformPass'];
+           $gender=$_POST['gender'];
+           $province=$_POST['province'];
+           $sql ="INSERT INTO `register` (`SN`, `name`, `email`, `password`, `conformpass`, `gender`, `province`, `usertype`,)
+           VALUES ('', '$name', '$email', '$password', '$conformpass', '$gender', '$province','',)";
+           $result= mysqli_query($con,$sql);
+           if($result){
+            echo "Data inserted successfully.";
+           }
+           else{
+            die(mysqli_error($con));
+          }
+         }
+    ?> 
 </body>
-
 </html>

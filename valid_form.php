@@ -1,29 +1,46 @@
 <?php
-$email=$_POST['email'];
+// define variablesand to input values
+$name = $email = $password = $conformPass = '';
 
-if (filter_var($email, FILTER_VALIDATE_EMAIL) ==false );{
-    exit('invalid email');
+if($_SERVER['REQUEST_METHOD'] == 'POST') { 
+    $name = test_input($_POST['name']);
+    $email = test_input($_POST['email']);
+    $password = test_input($_POST['password']);
+    $conform_password = test_input($_POST['conformPass']);
 }
-// echo 'Email address is valid';
-$api_key = "891a77b919cb4135b54d11e25de6f4bc";
-$ch = curl_int();
-curl_setopt_array($ch) {
-    CURL0PT_URL => "https://emailvalidation.abstractapi.com/v1/?api_key$email=$email",
-    CURLOPT_RETURNTRANSFER => true,
-    CULROPT_FOLLOWLOCATION => true
 
-};
-$response = curl_exec($ch);
-curl_close($ch);
-$data = json_decode($response, true);
+function test_input($data){
+    $data = trim($data);
+    $data = stripcslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
-// var_dump($data);
-// exit;
-if ($data['deliverability'] === "UNDELIVERABLE") {
-    exit("Undeliverable");
+// define variables and set to empty string
+$nameErr = $emailErr = "";
+$name = $email = "";
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(empty($_POST['name'])) {
+        $nameErr = "Please enter vaild name";
+
+    }
+    else{
+        $name = test_input($_POST['name']);
+        if(!preg_match("/^[a-zA-Z0-9]+()", $name)){
+            $nameErr = "Only letters and whitespaces allowed";
+        }
+    }
 
 }
-if ($data["is_disposable_email"]["value"] === true){
-    exit("Disposable");
+
+if(empty($_POST['email'])) {
+    $nameErr = "Please enter vaild email address";
+
+}
+else{
+    $name = test_input($_POST['email']);
+    if(!filter_var( $email;, FILTER_VALIDATE_EMAIL)){
+        $emailErr = "The email address is incorrect";
+    }
 }
 ?>

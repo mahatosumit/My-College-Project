@@ -24,7 +24,7 @@ $sql = "UPDATE userdetails SET STUDENT_NAME='$username', TEACHER_PHOTO='$photo',
 if (mysqli_query($conn, $sql)) {
   echo "Record updated successfully";
 } else {
-  echo "Error updating record: " . mysqli_error($con);
+  echo "Error updating record: " . mysqli_error($conn);
 }
 
 mysqli_close($conn);

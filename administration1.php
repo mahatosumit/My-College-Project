@@ -71,7 +71,7 @@
   <div class="navbar">
   <input type="Search" placeholder="Search..." name="search">
   <i class="fa fa-search" aria-hidden="true"></i>
-  <a  href='modify_db_form.php?id=" . $row["id"] . "' class="edit">EDIT</a>
+  <a  href='modify1_db_form.php?id=" . $row["id"] . "' class="edit">EDIT</a>
   <a href='delete_db_form.php?id=" . $row["id"] . "' class="delete">DELETE</a>
   </div>
   <table>
@@ -91,14 +91,14 @@
   </table>
   <?php
   //Connection to the database
-  $conn = mysqli_connect("localhost", "root", "", "collage");
+  $connection = mysqli_connect("localhost", "root", "", "collage");
 
-  if (!$conn) {
+  if (!$connection) {
     die("Connection failed: " . mysqli_connect_error());
   }
 
   // Get data from the users table
-  $sql = "SELECT * FROM userdetails";
+  $sql = "SELECT * FROM student";
   $result = mysqli_query($conn, $sql);
   if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {

@@ -84,16 +84,16 @@
     </tr>
     </table>
     <?php
-    // Connection to the database
-    $con = mysqli_connect("localhost", "root", "", "collage");
+     //Connection to the database
+  $connection = mysqli_connect("localhost", "root", "", "collage");
 
-    if (!$con) {
-      die("Connection failed: " . mysqli_connect_error());
-    }
+  if (!$connection) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
 
-    // Get User data from the users table
-    $sql = "SELECT * FROM userdetails";
-    $result = mysqli_query($con, $sql);
+  // Get data from the users table
+  $sql = "SELECT * FROM info";
+  $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
       while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
@@ -110,7 +110,7 @@
       echo "<tr><td colspan='9'>No records found</td></tr>";
     }
 
-    mysqli_close($con);
+    mysqli_close($conn);
     ?>
     
 </body>

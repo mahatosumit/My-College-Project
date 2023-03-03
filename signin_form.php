@@ -14,28 +14,28 @@
   <div class="container">
     <h2>Signin Form </h2>
     <div class="form-container">
-      <form method="post" action="connect.php">
+      <form method="post" action="valid_form.php">
         <div class="input-name">
           <i class="fa fa-user"></i>
-          <input type="text" placeholder="Your Name" class="name" name="name">
+          <input type="text" placeholder="Your Name" class="name" name="name" required>
 
         </div>
         <div class="input-name">
           <i class="fa fa-envelope email"></i>
-          <input type="text" placeholder="Email" class="name"  name="Email">
+          <input type="text" placeholder="Email" class="name"  name="Email" required>
         </div>
 
         <div class="input-name">
           <i class="fa fa-lock" aria-hidden="true"></i>
 
 
-          <input type="text" placeholder="Password" class="name"  name="Password">
+          <input type="text" placeholder="Password" class="name"  name="Password" required>
         </div>
 
         <div class="input-name">
           <i class="fa fa-lock" aria-hidden="true"></i>
 
-          <input type="text" placeholder="Conform Password" class="name"  name="conformPass">
+          <input type="text" placeholder="Conform Password" class="name"  name="conformPass" required>
         </div>
 
       
@@ -46,7 +46,7 @@
         
 
         <div class="Signin">
-          <button type="submit" class="Register" name="register" onclick="window.location.href='who.htm';">Signin</button>
+          <button type="submit" class="Register" name="register" onclick="window.location.href='who.php';" required>Signin</button>
         </div>
 
       </form>
@@ -54,12 +54,12 @@
   </div>
     <?php
 $con=mysqli_connect('localhost','root','','collage');
-if(isset($_POST['sb']) )
+if(isset($_GET['register']) )
 {
     $name=$_POST['name'];
     $email=$_POST['Email'];
     $password=$_POST['password'];
-    $conform_password=$_POST['conformpass'];
+    $conform_password=$_POST['password'];
     $query="INSERT INTO `register` (`SN`, `name`, `email`, `password`, `conformpass`) 
     VALUES ('', '$name', '$email', '$password', '$conform_password')";
     $run=mysqli_query($con,$query);
